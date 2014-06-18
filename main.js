@@ -3,9 +3,9 @@ var request = require('request')
 
 var growl = require('growl');
 
-var url = 'http://keralaresults.nic.in/'
+var url = process.argv[2];
 var count=-1;
-var check_count=0;
+growl("Monitoring "+process.argv[2])
 
 var check= function(){
 request(url, function(err, resp, body){
@@ -17,13 +17,12 @@ request(url, function(err, resp, body){
 
   if(new_count!=count)
   		{
-  		 growl('Seems like results are out !');
+  		 growl('Results Out !!');
+       
   		}
-
-  check_count++;
-  console.log("Number of times :"+check_count)
+  
   
 });
 }
 
-setInterval(check,1000);
+setInterval(check,10000);
